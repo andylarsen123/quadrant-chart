@@ -1,1 +1,81 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Political Compass Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    canvas {
+      max-width: 600px;
+      margin: 40px auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="compassChart"></canvas>
+
+<script>
+  const ctx = document.getElementById('compassChart').getContext('2d');
+
+  const compassChart = new Chart(ctx, {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        label: 'Your Position',
+        data: [{
+          x: -3, // Economic position: Left (-10) to Right (+10)
+          y: -4  // Social position: Libertarian (-10) to Authoritarian (+10)
+        }],
+        backgroundColor: 'red',
+        pointRadius: 7
+      }]
+    },
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: 'Political Compass'
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              return `X: ${context.raw.x}, Y: ${context.raw.y}`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          type: 'linear',
+          position: 'bottom',
+          min: -10,
+          max: 10,
+          title: {
+            display: true,
+            text: 'Economic (Left to Right)'
+          },
+          grid: {
+            color: 'lightgray'
+          }
+        },
+        y: {
+          min: -10,
+          max: 10,
+          title: {
+            display: true,
+            text: 'Social (Libertarian to Authoritarian)'
+          },
+          grid: {
+            color: 'lightgray'
+          }
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
