@@ -5,16 +5,23 @@
   <title>Coastal Resilience Compass</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    canvas {
-      max-width: 700px;
+    #chart-container {
+      width: 600px;
+      height: 600px;
       margin: 40px auto;
-      display: block;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
     }
   </style>
 </head>
 <body>
 
-<canvas id="resilienceCompass"></canvas>
+<div id="chart-container">
+  <canvas id="resilienceCompass"></canvas>
+</div>
 
 <script>
   const ctx = document.getElementById('resilienceCompass').getContext('2d');
@@ -34,6 +41,8 @@
       }]
     },
     options: {
+      responsive: false, // disables Chart.js auto-resizing
+      maintainAspectRatio: false,
       plugins: {
         title: {
           display: true,
@@ -78,3 +87,4 @@
 
 </body>
 </html>
+
