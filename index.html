@@ -1,13 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Political Compass Chart</title>
+  <title>Coastal Resilience Compass</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     canvas {
-      max-width: 600px;
+      max-width: 700px;
       margin: 40px auto;
       display: block;
     }
@@ -15,21 +14,22 @@
 </head>
 <body>
 
-<canvas id="compassChart"></canvas>
+<canvas id="resilienceCompass"></canvas>
 
 <script>
-  const ctx = document.getElementById('compassChart').getContext('2d');
+  const ctx = document.getElementById('resilienceCompass').getContext('2d');
 
-  const compassChart = new Chart(ctx, {
+  const resilienceCompass = new Chart(ctx, {
     type: 'scatter',
     data: {
       datasets: [{
-        label: 'Your Position',
-        data: [{
-          x: -3, // Economic position: Left (-10) to Right (+10)
-          y: -4  // Social position: Libertarian (-10) to Authoritarian (+10)
-        }],
-        backgroundColor: 'red',
+        label: 'Coastal Resilience Tools',
+        data: [
+          { x: 5, y: 15, label: 'Shoreline Setback' },
+          { x: 5, y: 18, label: 'Shoreline Greenbelt' },
+          { x: 10, y: 18, label: 'Shoreline Overlay' }
+        ],
+        backgroundColor: 'blue',
         pointRadius: 7
       }]
     },
@@ -37,12 +37,12 @@
       plugins: {
         title: {
           display: true,
-          text: 'Political Compass'
+          text: 'Coastal Resilience Compass (Effort vs. Effectiveness)'
         },
         tooltip: {
           callbacks: {
             label: function(context) {
-              return `X: ${context.raw.x}, Y: ${context.raw.y}`;
+              return `${context.raw.label} (Effort: ${context.raw.x}, Effectiveness: ${context.raw.y})`;
             }
           }
         }
@@ -50,23 +50,22 @@
       scales: {
         x: {
           type: 'linear',
-          position: 'bottom',
-          min: -10,
-          max: 10,
+          min: 0,
+          max: 20,
           title: {
             display: true,
-            text: 'Economic (Left to Right)'
+            text: 'Implementation Effort (Low → High)'
           },
           grid: {
             color: 'lightgray'
           }
         },
         y: {
-          min: -10,
-          max: 10,
+          min: 0,
+          max: 20,
           title: {
             display: true,
-            text: 'Social (Libertarian to Authoritarian)'
+            text: 'Effectiveness (Low → High)'
           },
           grid: {
             color: 'lightgray'
